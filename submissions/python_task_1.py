@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def generate_car_matrix(df)->pd.DataFrame:
+def generate_car_matrix(df: pd.DataFrame)->pd.DataFrame:
     """
     Creates a DataFrame  for id combinations.
 
@@ -13,8 +13,14 @@ def generate_car_matrix(df)->pd.DataFrame:
                           where 'id_1' and 'id_2' are used as indices and columns respectively.
     """
     # Write your logic here
+    # Create a new DataFrame with the specified columns and index.
+    car_matrix = pd.pivot_table(
+      df, values="car", index="id_1", columns="id_2", aggfunc=sum, fill_value=0
+    )
 
-    return df
+    # Set the diagonal values to 0.
+    car_matrix.diagonal()[:] = 0
+    return car_matrix
 
 
 def get_type_count(df)->dict:
@@ -90,3 +96,13 @@ def time_check(df)->pd.Series:
     # Write your logic here
 
     return pd.Series()
+
+
+# Read the dataset-1.csv file into a Pandas DataFrame.
+dataset_1 = pd.read_csv('dataset-1.csv')
+
+# Generate the car matrix.
+car_matrix = generate_car_matrix(dataset_1)
+
+# Print the car matrix.
+print(car_matrix)
