@@ -1,10 +1,6 @@
 import pandas as pd
 import numpy as np
 
-<<<<<<< HEAD:submissions/python_task_1.py
-
-=======
->>>>>>> f87eab457e8f95007c93ec1d4decbf7a56d8a8e5:templates/python_task_1.py
 def generate_car_matrix(df: pd.DataFrame)->pd.DataFrame:
     """
     Creates a DataFrame  for id combinations.
@@ -18,14 +14,12 @@ def generate_car_matrix(df: pd.DataFrame)->pd.DataFrame:
     """
     # Write your logic here
     # Create a new DataFrame with the specified columns and index.
-<<<<<<< HEAD:submissions/python_task_1.py
     car_matrix = pd.pivot_table(
       df, values="car", index="id_1", columns="id_2", aggfunc=sum, fill_value=0
     )
 
     # Set the diagonal values to 0.
     car_matrix.diagonal()[:] = 0
-=======
     # Pivot the DataFrame
     car_matrix = df.pivot(index='id_1', columns='id_2', values='car').fillna(0)
     
@@ -33,7 +27,6 @@ def generate_car_matrix(df: pd.DataFrame)->pd.DataFrame:
     for idx in car_matrix.index:
         car_matrix.loc[idx, idx] = 0
     
->>>>>>> f87eab457e8f95007c93ec1d4decbf7a56d8a8e5:templates/python_task_1.py
     return car_matrix
 
 
@@ -153,7 +146,6 @@ def time_check(df)->pd.Series:
         pd.Series: return a boolean series
     """
     # Write your logic here
-<<<<<<< HEAD:submissions/python_task_1.py
 
     return pd.Series()
 
@@ -166,7 +158,6 @@ car_matrix = generate_car_matrix(dataset_1)
 
 # Print the car matrix.
 print(car_matrix)
-=======
     # Combine 'startDay' and 'startTime' columns to create a start timestamp
     df['start_timestamp'] = pd.to_datetime(df['startDay'] + ' ' + df['startTime'], format='%A %H:%M:%S')
     
@@ -190,4 +181,3 @@ print(car_matrix)
     time_completeness = ~check_conditions.groupby([df['id'], df['id_2']]).any()
     
     return time_completeness
->>>>>>> f87eab457e8f95007c93ec1d4decbf7a56d8a8e5:templates/python_task_1.py
